@@ -14,13 +14,14 @@
         "ghcr.io/devcontainers/features/git:1": {
             "version": "latest",
             "ppa": "false"
-        },
+        }
     },
     "containerEnv": {
         "JAVA_HOME": "/usr/lib/jvm/msopenjdk-current"
     },
-    "postCreateCommand": "pip install flask",
     "forwardPorts": [5000],  // Forward Flask's default port
+    "postCreateCommand": "pip install flask",
+    "postStartCommand": "pip install -r /workspaces/test/app/requirements.txt && sleep 5 && bash -x /workspaces/test/app/start_flask.sh start > /workspaces/test/app/debug_poststart.log 2>&1",
     "customizations": {
       "vscode": {
         "extensions": [
